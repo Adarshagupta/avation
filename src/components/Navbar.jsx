@@ -9,14 +9,14 @@ const Navbar = () => {
   const { scrollY } = useScroll();
   
   // Transform values for floating effect
-  const navY = useTransform(scrollY, [0, 100], [15, 10]);
+  const navY = useTransform(scrollY, [0, 100], [8, 5]);
   const navScale = useTransform(scrollY, [0, 100], [1, 0.98]);
   const navOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
-  const navBlur = useTransform(scrollY, [0, 100], ['blur(4px)', 'blur(8px)']);
+  const navBlur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(8px)']);
   const navShadow = useTransform(
     scrollY, 
     [0, 100], 
-    ['0 4px 20px rgba(0, 71, 171, 0.1)', '0 8px 30px rgba(0, 71, 171, 0.15)']
+    ['0 0 0 rgba(0, 0, 0, 0)', '0 8px 30px rgba(0, 71, 171, 0.15)']
   );
   
   // Update active section based on scroll position
@@ -52,12 +52,12 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed w-full z-50 flex justify-center items-start px-4 pt-4">
+    <div className="fixed w-full z-50 flex justify-center items-start px-4 pt-2">
       <motion.nav 
-        className={`w-full max-w-6xl rounded-xl border ${
+        className={`w-full max-w-6xl rounded-xl ${
           scrolled 
-            ? 'py-2 backdrop-blur-lg bg-white/70 border-white/50' 
-            : 'py-4 backdrop-blur-sm bg-white/30 border-white/30'
+            ? 'py-3 backdrop-blur-lg bg-white/70 border border-white/50' 
+            : 'py-4 bg-white/10 backdrop-blur-sm border border-white/10'
         }`}
         style={{ 
           y: navY,
@@ -79,7 +79,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
           >
             <motion.span 
-              className={`text-2xl font-bold ${scrolled ? 'text-aviation-blue' : 'text-aviation-blue/90'}`}
+              className={`text-2xl font-bold ${scrolled ? 'text-aviation-blue' : 'text-aviation-blue'}`}
               whileHover={{ 
                 textShadow: "0 0 8px rgba(0, 71, 171, 0.3)" 
               }}
@@ -89,15 +89,15 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className={`relative px-2 py-1 ${
+                className={`relative px-2 text-base ${
                   activeSection === link.href.substring(1)
-                    ? 'text-aviation-blue font-medium'
-                    : 'text-gray-700 hover:text-aviation-blue'
+                    ? scrolled ? 'text-aviation-blue font-medium' : 'text-aviation-blue font-medium'
+                    : scrolled ? 'text-gray-700 hover:text-aviation-blue' : 'text-gray-800 hover:text-aviation-blue'
                 } transition-colors`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const Navbar = () => {
                 {link.label}
                 {activeSection === link.href.substring(1) && (
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-aviation-accent"
+                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-aviation-accent`}
                     layoutId="activeSection"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -118,15 +118,13 @@ const Navbar = () => {
             ))}
             
             <motion.button
-              className={`btn ${scrolled ? 'btn-primary' : 'btn-secondary'}`}
+              className={`btn py-2 px-5 text-sm ${scrolled ? 'btn-primary' : 'btn-primary'}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               whileHover={{ 
                 scale: 1.05, 
-                boxShadow: scrolled 
-                  ? "0 10px 25px -5px rgba(0, 71, 171, 0.4)" 
-                  : "0 10px 25px -5px rgba(255, 107, 0, 0.4)" 
+                boxShadow: "0 10px 25px -5px rgba(0, 71, 171, 0.4)" 
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -143,7 +141,7 @@ const Navbar = () => {
           >
             <motion.button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 focus:outline-none relative z-50"
+              className={`focus:outline-none relative z-50 ${scrolled ? 'text-gray-700' : 'text-aviation-blue'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -184,12 +182,12 @@ const Navbar = () => {
               transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 30 }}
               className="md:hidden bg-white/95 backdrop-blur-md absolute top-full left-0 right-0 shadow-lg rounded-b-2xl border-t border-gray-100 overflow-hidden"
             >
-              <div className="flex flex-col space-y-4 px-6 py-8">
+              <div className="flex flex-col space-y-3 px-6 py-6">
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    className={`text-lg ${
+                    className={`text-base ${
                       activeSection === link.href.substring(1)
                         ? 'text-aviation-blue font-medium'
                         : 'text-gray-700'
@@ -204,7 +202,7 @@ const Navbar = () => {
                   </motion.a>
                 ))}
                 <motion.button
-                  className="btn btn-primary mt-4"
+                  className="btn btn-primary py-2 text-sm mt-2"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, type: 'spring' }}
