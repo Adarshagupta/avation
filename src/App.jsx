@@ -10,10 +10,13 @@ import AnimatedPlanes from './components/AnimatedPlanes';
 import ParallaxClouds from './components/ParallaxClouds';
 import CockpitUIDemo from './components/CockpitUIDemo';
 import LoadingScreen from './components/LoadingScreen';
+import CacheMonitor from './components/CacheMonitor';
 import './index.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminApiKey, setAdminApiKey] = useState('');
 
   // Smooth scrolling for anchor links
   useEffect(() => {
@@ -32,6 +35,29 @@ function App() {
       });
     });
   }, []);
+
+  // Check for admin mode with keyboard shortcut (Ctrl+Shift+A)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        if (!isAdmin) {
+          const key = prompt('Enter admin API key:');
+          if (key) {
+            setAdminApiKey(key);
+            setIsAdmin(true);
+            console.log('Admin mode activated');
+          }
+        } else {
+          setIsAdmin(false);
+          setAdminApiKey('');
+          console.log('Admin mode deactivated');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAdmin]);
 
   return (
     <div className="min-h-screen">
@@ -59,6 +85,9 @@ function App() {
         <Testimonials />
         <Contact />
         <Footer />
+
+        {/* Cache Monitor (only visible in admin mode) */}
+        {isAdmin && <CacheMonitor apiKey={adminApiKey} />}
       </div>
     </div>
   );
