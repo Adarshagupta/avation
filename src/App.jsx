@@ -11,6 +11,7 @@ import ParallaxClouds from './components/ParallaxClouds';
 import CockpitUIDemo from './components/CockpitUIDemo';
 import LoadingScreen from './components/LoadingScreen';
 import CacheMonitor from './components/CacheMonitor';
+import ProjectShowcase from './components/ProjectShowcase';
 import './index.css';
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
         <Hero key={loading ? 'loading' : 'loaded'} />
         <About />
         <Courses />
+        <ProjectShowcase />
         <CockpitUIDemo />
         <Testimonials />
         <Contact />

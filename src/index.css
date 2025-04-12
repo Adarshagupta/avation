@@ -76,3 +76,136 @@ body {
     }
   }
 }
+
+/* Parallax and Scroll Effects */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+  -webkit-scroll-snap-align: center;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Touch-friendly scrolling for courses section */
+@media (hover: none) {
+  .course-card-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+  }
+  
+  .course-card {
+    scroll-snap-align: start;
+  }
+}
+
+/* Enhance hover effects on non-touch devices */
+@media (hover: hover) {
+  .course-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* Hardware acceleration for smoother animations */
+.parallax-element {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Smooth transition utility classes */
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.transition-all-smooth {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+/* Project Showcase Styles */
+.project-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+.project-image {
+  transition: transform 8s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+}
+
+.project-indicator {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: all 0.3s ease;
+}
+
+.project-indicator.active {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Improved aspect ratio utilities */
+.aspect-16-9 {
+  aspect-ratio: 16/9;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4/3;
+}
+
+.aspect-1-1 {
+  aspect-ratio: 1/1;
+}
+
+/* Responsive showcase layout for different viewports */
+@media (max-width: 768px) {
+  .showcase-content {
+    flex-direction: column;
+  }
+}
+
+/* Enhanced blur effects for parallax elements */
+.blur-gradient {
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8), rgba(255,255,255,0));
+  filter: blur(50px);
+}
+
+/* Subtle hover interactions */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* Animated progress bar */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
