@@ -11,6 +11,7 @@ import CockpitUIDemo from './components/CockpitUIDemo';
 import LoadingScreen from './components/LoadingScreen';
 import CacheMonitor from './components/CacheMonitor';
 import ProjectShowcase from './components/ProjectShowcase';
+import Courses from './components/Courses';
 import './index.css';
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
         {/* Main content */}
         <Hero key={loading ? 'loading' : 'loaded'} />
         <About />
+        <Courses />
         <ProjectShowcase />
         <CockpitUIDemo />
         <Testimonials />
