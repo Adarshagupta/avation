@@ -209,3 +209,48 @@ body {
   background-color: #000;
   transition: width 0.3s ease;
 }
+
+/* Smooth Scrolling */
+html, body {
+  overscroll-behavior: none; /* Prevent bounce effects */
+}
+
+.smooth-scroll-container {
+  height: 100%;
+  position: relative;
+  scroll-behavior: auto; /* We're handling scroll behavior through JS */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Section appearance enhancements for smooth scrolling */
+section {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* Add page transition delays for smoother flow */
+.section-transition-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.section-transition-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.section-transition-delay-3 {
+  transition-delay: 0.3s;
+}
+
+/* Prevent fast scrolling on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
