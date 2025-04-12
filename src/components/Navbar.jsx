@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const location = useLocation();
 
   // Transform values for floating effect
   const navY = useTransform(scrollY, [0, 100], [8, 5]);
@@ -19,20 +21,23 @@ const Navbar = () => {
     ['0 0 0 rgba(0, 0, 0, 0)', '0 8px 30px rgba(0, 71, 171, 0.15)']
   );
 
-  // Update active section based on scroll position
+  // Update active section based on location and scroll position
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Determine which section is currently in view
-      const sections = ['home', 'about', 'courses', 'testimonials', 'contact'];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(section);
-            break;
+      // Only check for sections if we're on the homepage
+      if (location.pathname === '/') {
+        // Determine which section is currently in view
+        const sections = ['home', 'about', 'courses', 'testimonials', 'contact'];
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 120 && rect.bottom >= 120) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
       }
@@ -40,15 +45,33 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  // Set active based on current route
+  useEffect(() => {
+    if (location.pathname === '/blog') {
+      setActiveSection('blog');
+    } else if (location.pathname === '/classes') {
+      setActiveSection('classes');
+    } else if (location.pathname === '/about') {
+      setActiveSection('about');
+    } else if (location.pathname === '/testimonials') {
+      setActiveSection('testimonials');
+    } else if (location.pathname === '/contact') {
+      setActiveSection('contact');
+    } else if (location.pathname === '/') {
+      setActiveSection('home');
+    }
+  }, [location.pathname]);
 
   // Links for both desktop and mobile menus
   const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#courses', label: 'Courses' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact' }
+    { to: '/', label: 'Home', id: 'home' },
+    { to: '/about', label: 'About', id: 'about' },
+    { to: '/classes', label: 'Classes', id: 'classes' },
+    { to: '/testimonials', label: 'Testimonials', id: 'testimonials' },
+    { to: '/blog', label: 'Blog', id: 'blog' },
+    { to: '/contact', label: 'Contact', id: 'contact' }
   ];
 
   return (
@@ -78,43 +101,48 @@ const Navbar = () => {
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            <motion.span
-              className={`text-2xl font-bold ${scrolled ? 'text-aviation-blue' : 'text-aviation-blue'}`}
-              whileHover={{
-                textShadow: "0 0 8px rgba(0, 71, 171, 0.3)"
-              }}
-            >
-              Aviation Academy
-            </motion.span>
+            <Link to="/">
+              <motion.span
+                className={`text-2xl font-bold ${scrolled ? 'text-aviation-blue' : 'text-aviation-blue'}`}
+                whileHover={{
+                  textShadow: "0 0 8px rgba(0, 71, 171, 0.3)"
+                }}
+              >
+                Aviation Academy
+              </motion.span>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link, index) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                className={`relative px-2 text-base ${
-                  activeSection === link.href.substring(1)
-                    ? scrolled ? 'text-aviation-blue font-medium' : 'text-aviation-blue font-medium'
-                    : scrolled ? 'text-gray-700 hover:text-aviation-blue' : 'text-gray-800 hover:text-aviation-blue'
-                } transition-colors`}
+              <motion.div
+                key={link.id}
+                className="relative"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                whileHover={{ y: -2 }}
               >
-                {link.label}
-                {activeSection === link.href.substring(1) && (
-                  <motion.div
-                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-aviation-accent`}
-                    layoutId="activeSection"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </motion.a>
+                <Link
+                  to={link.to}
+                  className={`px-2 text-base ${
+                    activeSection === link.id
+                      ? scrolled ? 'text-aviation-blue font-medium' : 'text-aviation-blue font-medium'
+                      : scrolled ? 'text-gray-700 hover:text-aviation-blue' : 'text-gray-800 hover:text-aviation-blue'
+                  } transition-colors`}
+                >
+                  {link.label}
+                  {activeSection === link.id && (
+                    <motion.div
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 bg-aviation-accent`}
+                      layoutId="activeSection"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
 
             <motion.button
@@ -184,22 +212,25 @@ const Navbar = () => {
             >
               <div className="flex flex-col space-y-3 px-6 py-6">
                 {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    className={`text-base ${
-                      activeSection === link.href.substring(1)
-                        ? 'text-aviation-blue font-medium'
-                        : 'text-gray-700'
-                    }`}
+                  <motion.div
+                    key={link.id}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    onClick={() => setIsOpen(false)}
                     whileHover={{ x: 5 }}
                   >
-                    {link.label}
-                  </motion.a>
+                    <Link
+                      to={link.to}
+                      className={`text-base ${
+                        activeSection === link.id
+                          ? 'text-aviation-blue font-medium'
+                          : 'text-gray-700'
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
                 <motion.button
                   className="btn btn-primary py-2 text-sm mt-2"
