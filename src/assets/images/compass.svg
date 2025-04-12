@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <circle cx="200" cy="200" r="180" fill="#0047AB" fill-opacity="0.05" stroke="#0047AB" stroke-width="2"/>
+  <circle cx="200" cy="200" r="150" fill="#0047AB" fill-opacity="0.05" stroke="#0047AB" stroke-width="1"/>
+  <line x1="200" y1="20" x2="200" y2="50" stroke="#0047AB" stroke-width="2"/>
+  <line x1="200" y1="350" x2="200" y2="380" stroke="#0047AB" stroke-width="2"/>
+  <line x1="20" y1="200" x2="50" y2="200" stroke="#0047AB" stroke-width="2"/>
+  <line x1="350" y1="200" x2="380" y2="200" stroke="#0047AB" stroke-width="2"/>
+  <path d="M200,80 L220,190 L200,200 L180,190 Z" fill="#FF6B00"/>
+  <path d="M200,320 L180,210 L200,200 L220,210 Z" fill="#0047AB"/>
+  <text x="200" y="70" text-anchor="middle" font-family="Arial" font-size="16" fill="#0047AB">N</text>
+  <text x="200" y="340" text-anchor="middle" font-family="Arial" font-size="16" fill="#0047AB">S</text>
+  <text x="340" y="205" text-anchor="middle" font-family="Arial" font-size="16" fill="#0047AB">E</text>
+  <text x="60" y="205" text-anchor="middle" font-family="Arial" font-size="16" fill="#0047AB">W</text>
+  <circle cx="200" cy="200" r="5" fill="#0047AB"/>
+</svg>

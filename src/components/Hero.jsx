@@ -1,8 +1,15 @@
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import { FiChevronDown } from 'react-icons/fi';
-import { FaPlaneDeparture, FaPlaneArrival, FaPlane } from 'react-icons/fa';
+import { FiChevronDown, FiCompass, FiMap } from 'react-icons/fi';
+import { FaPlaneDeparture, FaPlaneArrival, FaPlane, FaGraduationCap, FaUserTie } from 'react-icons/fa';
 import { useEffect, useRef, useState } from 'react';
 import { CockpitButton } from './CockpitUI';
+
+// Import SVG assets
+import cockpitSvg from '../assets/images/cockpit.svg';
+import flightPathSvg from '../assets/images/flight-path.svg';
+import airplaneSilhouetteSvg from '../assets/images/airplane-silhouette.svg';
+import compassSvg from '../assets/images/compass.svg';
+import cloudsSvg from '../assets/images/clouds.svg';
 
 const Hero = () => {
   // Force animations to restart when component is remounted after loading screen
@@ -202,60 +209,6 @@ const Hero = () => {
         />
       </div>
 
-      {/* Featured plane on right side */}
-      <motion.div
-        className="absolute right-0 top-1/4 z-10 hidden md:block"
-        initial={{ opacity: 0, x: 100, rotate: -10 }}
-        animate={{ opacity: 1, x: 0, rotate: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <motion.div
-          className="relative"
-          animate={{
-            y: [0, -15, 0],
-            rotate: [-2, 2, -2]
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        >
-          {/* Plane silhouette */}
-          <svg width="400" height="250" viewBox="0 0 400 250" className="text-aviation-blue">
-            <motion.path
-              d="M390,125 C380,115 350,105 320,105 L180,105 L120,65 C115,60 110,60 105,65 L95,75 C90,80 90,85 95,90 L130,105 L80,105 C70,105 50,115 40,125 L20,145 C15,150 15,155 20,160 L40,170 C50,175 60,175 70,170 L130,145 L320,145 C350,145 380,135 390,125 Z"
-              fill="currentColor"
-              initial={{ opacity: 0, pathLength: 0 }}
-              animate={{ opacity: 1, pathLength: 1 }}
-              transition={{ duration: 2, delay: 0.8 }}
-            />
-            {/* Windows */}
-            <motion.g
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }}
-              transition={{ duration: 1, delay: 2 }}
-            >
-              <circle cx="200" cy="125" r="5" fill="white" />
-              <circle cx="230" cy="125" r="5" fill="white" />
-              <circle cx="260" cy="125" r="5" fill="white" />
-              <circle cx="290" cy="125" r="5" fill="white" />
-            </motion.g>
-          </svg>
-
-          {/* Motion trail */}
-          <motion.div
-            className="absolute top-1/2 right-full w-40 h-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.5, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="w-full h-full bg-gradient-to-l from-aviation-blue/30 to-transparent rounded-full blur-sm"></div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
       {/* Main content */}
       <div className="container mx-auto px-4 md:px-6 h-screen flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-full">
@@ -372,6 +325,138 @@ const Hero = () => {
               <StatCard number="1000+" label="Graduates" delay={0.2} />
               <StatCard number="98%" label="Success Rate" delay={0.4} />
             </motion.div>
+          </div>
+
+          {/* Right side - Visual elements */}
+          <div className="hidden lg:block relative">
+            {/* Main airplane image */}
+            <motion.div
+              className="relative z-20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <motion.img
+                src={airplaneSilhouetteSvg}
+                alt="Airplane Silhouette"
+                className="w-full max-w-lg mx-auto"
+                animate={{
+                  y: [0, -15, 0],
+                  rotate: [-2, 2, -2]
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
+
+            {/* Floating elements */}
+            <div className="absolute inset-0 pointer-events-none">
+              {/* Cockpit UI element */}
+              <motion.img
+                src={cockpitSvg}
+                alt="Cockpit UI"
+                className="absolute top-0 right-0 w-64 opacity-60"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.6, scale: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+
+              {/* Flight path */}
+              <motion.img
+                src={flightPathSvg}
+                alt="Flight Path"
+                className="absolute bottom-0 left-0 w-80 opacity-70"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.7 }}
+                transition={{ duration: 1, delay: 0.7 }}
+              />
+
+              {/* Compass */}
+              <motion.img
+                src={compassSvg}
+                alt="Navigation Compass"
+                className="absolute top-1/4 left-1/4 w-32 opacity-80"
+                initial={{ opacity: 0, rotate: -30 }}
+                animate={{
+                  opacity: 0.8,
+                  rotate: 0,
+                  transition: { duration: 1, delay: 0.9 }
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 15,
+                  transition: { duration: 0.3 }
+                }}
+              />
+
+              {/* Clouds */}
+              <motion.img
+                src={cloudsSvg}
+                alt="Clouds"
+                className="absolute bottom-10 right-10 w-64 opacity-50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 0.5, y: 0 }}
+                transition={{ duration: 1, delay: 1.1 }}
+              />
+            </div>
+
+            {/* Info cards */}
+            <div className="absolute inset-0 flex flex-col justify-center items-end gap-4 pr-4">
+              <motion.div
+                className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md border border-aviation-blue/20 w-64"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.3 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-aviation-blue/10 p-2 rounded-full">
+                    <FaGraduationCap className="text-aviation-blue text-xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-aviation-blue">Certified Training</h3>
+                    <p className="text-sm text-gray-600">FAA & EASA approved courses</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md border border-aviation-blue/20 w-64"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.5 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-aviation-accent/10 p-2 rounded-full">
+                    <FaUserTie className="text-aviation-accent text-xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-aviation-blue">Expert Instructors</h3>
+                    <p className="text-sm text-gray-600">Learn from industry veterans</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md border border-aviation-blue/20 w-64"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 1.7 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-aviation-blue/10 p-2 rounded-full">
+                    <FiCompass className="text-aviation-blue text-xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-aviation-blue">Career Guidance</h3>
+                    <p className="text-sm text-gray-600">Placement assistance included</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
