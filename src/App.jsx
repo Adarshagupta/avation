@@ -64,22 +64,19 @@ function App() {
       {/* Loading Screen */}
       <LoadingScreen finishLoading={() => setLoading(false)} />
 
-      {/* Navbar - always visible */}
-      <Navbar />
-
-      {/* Background animations - only visible after loading */}
-      {!loading && (
-        <>
-          <AnimatedPlanes />
-          <ParallaxClouds />
-        </>
-      )}
-
-      {/* Main content */}
+      {/* Navbar and content - only visible after loading */}
       <div
-        className={loading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}
+        className={loading ? 'opacity-0 invisible' : 'opacity-100 visible transition-opacity duration-500'}
         aria-hidden={loading}
       >
+        {/* Navbar */}
+        <Navbar />
+
+        {/* Background animations */}
+        <AnimatedPlanes />
+        <ParallaxClouds />
+
+        {/* Main content */}
         <Hero key={loading ? 'loading' : 'loaded'} />
         <About />
         <Courses />

@@ -46,7 +46,8 @@ const LoadingScreen = ({ finishLoading }) => {
     <AnimatePresence>
       {showLoading && (
         <motion.div
-          className="fixed inset-0 z-40 flex items-center justify-center bg-aviation-blue"
+          className="fixed inset-0 z-70 flex items-center justify-center bg-aviation-blue"
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}

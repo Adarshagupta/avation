@@ -16,6 +16,7 @@ export default {
       },
       zIndex: {
         '60': '60',
+        '70': '70',
       },
     },
   },
@@ -25,6 +26,7 @@ export default {
     'text-gray-800',
     'font-sans',
     'z-60',
+    'z-70',
     // Add other utility classes that might be used via @apply but not detected by the content scanner
   ]
 }
