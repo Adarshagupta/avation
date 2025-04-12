@@ -48,7 +48,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gray-50">
+    <section id="contact" className="section-padding bg-gray-50 navbar-spacing">
       <div className="container mx-auto container-padding">
         <motion.div
           className="text-center mb-16"

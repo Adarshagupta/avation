@@ -30,9 +30,9 @@ const Courses = () => {
   ];
 
   return (
-    <section id="courses" className="section-padding bg-gray-50">
+    <section id="courses" className="section-padding bg-gray-50 navbar-spacing">
       <div className="container mx-auto container-padding">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ const Courses = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {courses.map((course, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               initial={{ opacity: 0, y: 20 }}
@@ -74,7 +74,7 @@ const Courses = () => {
           ))}
         </div>
 
-        <motion.div 
+        <motion.div
           className="mt-12 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

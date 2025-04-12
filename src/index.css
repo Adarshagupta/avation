@@ -43,7 +43,7 @@ body {
   }
 
   .section-padding {
-    padding-top: 4rem;
+    padding-top: 6rem; /* Increased to account for fixed navbar */
     padding-bottom: 4rem;
   }
 
@@ -52,9 +52,14 @@ body {
     padding-right: 1rem;
   }
 
+  /* Ensure content isn't hidden behind fixed navbar */
+  .navbar-spacing {
+    padding-top: 100px; /* Increased to ensure enough space */
+  }
+
   @media (min-width: 768px) {
     .section-padding {
-      padding-top: 6rem;
+      padding-top: 8rem; /* Increased to account for fixed navbar */
       padding-bottom: 6rem;
     }
 

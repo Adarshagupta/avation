@@ -7,41 +7,41 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
-  
+
   // Transform values for floating effect
   const navY = useTransform(scrollY, [0, 100], [8, 5]);
   const navScale = useTransform(scrollY, [0, 100], [1, 0.98]);
   const navOpacity = useTransform(scrollY, [0, 100], [0.95, 1]);
   const navBlur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(8px)']);
   const navShadow = useTransform(
-    scrollY, 
-    [0, 100], 
+    scrollY,
+    [0, 100],
     ['0 0 0 rgba(0, 0, 0, 0)', '0 8px 30px rgba(0, 71, 171, 0.15)']
   );
-  
+
   // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
+
       // Determine which section is currently in view
       const sections = ['home', 'about', 'courses', 'testimonials', 'contact'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
+          if (rect.top <= 120 && rect.bottom >= 120) {
             setActiveSection(section);
             break;
           }
         }
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   // Links for both desktop and mobile menus
   const navLinks = [
     { href: '#home', label: 'Home' },
@@ -52,14 +52,14 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed w-full z-50 flex justify-center items-start px-4 pt-2">
-      <motion.nav 
+    <div className="fixed w-full z-60 flex justify-center items-start px-4 pt-2">
+      <motion.nav
         className={`w-full max-w-6xl rounded-xl ${
-          scrolled 
-            ? 'py-3 backdrop-blur-lg bg-white/70 border border-white/50' 
+          scrolled
+            ? 'py-3 backdrop-blur-lg bg-white/70 border border-white/50'
             : 'py-4 bg-white/10 backdrop-blur-sm border border-white/10'
         }`}
-        style={{ 
+        style={{
           y: navY,
           scale: navScale,
           boxShadow: navShadow,
@@ -71,17 +71,17 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-6 md:px-8 flex justify-between items-center">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            <motion.span 
+            <motion.span
               className={`text-2xl font-bold ${scrolled ? 'text-aviation-blue' : 'text-aviation-blue'}`}
-              whileHover={{ 
-                textShadow: "0 0 8px rgba(0, 71, 171, 0.3)" 
+              whileHover={{
+                textShadow: "0 0 8px rgba(0, 71, 171, 0.3)"
               }}
             >
               Aviation Academy
@@ -116,15 +116,15 @@ const Navbar = () => {
                 )}
               </motion.a>
             ))}
-            
+
             <motion.button
               className={`btn py-2 px-5 text-sm ${scrolled ? 'btn-primary' : 'btn-primary'}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0 10px 25px -5px rgba(0, 71, 171, 0.4)" 
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(0, 71, 171, 0.4)"
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -133,13 +133,13 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.div 
+          <motion.div
             className="md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <motion.button 
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className={`focus:outline-none relative z-50 ${scrolled ? 'text-gray-700' : 'text-aviation-blue'}`}
               whileHover={{ scale: 1.1 }}
@@ -175,7 +175,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0, y: -20 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -20 }}

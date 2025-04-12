@@ -41,9 +41,9 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="section-padding bg-white">
+    <section id="testimonials" className="section-padding bg-white navbar-spacing">
       <div className="container mx-auto container-padding">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ const Testimonials = () => {
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto">
-          <motion.div 
+          <motion.div
             key={currentIndex}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -67,9 +67,9 @@ const Testimonials = () => {
             className="bg-aviation-light p-8 md:p-12 rounded-lg"
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-              <img 
-                src={testimonials[currentIndex].image} 
-                alt={testimonials[currentIndex].name} 
+              <img
+                src={testimonials[currentIndex].image}
+                alt={testimonials[currentIndex].name}
                 className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
               />
               <div>
@@ -88,7 +88,7 @@ const Testimonials = () => {
           </motion.div>
 
           <div className="flex justify-center mt-8 gap-4">
-            <button 
+            <button
               onClick={prevTestimonial}
               className="p-2 rounded-full bg-aviation-blue text-white hover:bg-blue-700 transition-colors"
               aria-label="Previous testimonial"
@@ -97,7 +97,7 @@ const Testimonials = () => {
             </button>
             <div className="flex gap-2">
               {testimonials.map((_, index) => (
-                <button 
+                <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-aviation-blue' : 'bg-gray-300'}`}
@@ -105,7 +105,7 @@ const Testimonials = () => {
                 />
               ))}
             </div>
-            <button 
+            <button
               onClick={nextTestimonial}
               className="p-2 rounded-full bg-aviation-blue text-white hover:bg-blue-700 transition-colors"
               aria-label="Next testimonial"

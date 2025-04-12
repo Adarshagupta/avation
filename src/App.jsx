@@ -28,7 +28,7 @@ function App() {
 
         if (targetElement) {
           window.scrollTo({
-            top: targetElement.offsetTop - 80, // Offset for fixed navbar
+            top: targetElement.offsetTop - 100, // Increased offset for fixed navbar
             behavior: 'smooth'
           });
         }
@@ -64,6 +64,9 @@ function App() {
       {/* Loading Screen */}
       <LoadingScreen finishLoading={() => setLoading(false)} />
 
+      {/* Navbar - always visible */}
+      <Navbar />
+
       {/* Background animations - only visible after loading */}
       {!loading && (
         <>
@@ -77,7 +80,6 @@ function App() {
         className={loading ? 'opacity-0' : 'opacity-100 transition-opacity duration-500'}
         aria-hidden={loading}
       >
-        <Navbar />
         <Hero key={loading ? 'loading' : 'loaded'} />
         <About />
         <Courses />

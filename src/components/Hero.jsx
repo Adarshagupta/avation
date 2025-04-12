@@ -47,7 +47,7 @@ const Hero = () => {
     <section
       id="home"
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden navbar-spacing"
     >
       {/* Gradient background with zoom effect */}
       <motion.div

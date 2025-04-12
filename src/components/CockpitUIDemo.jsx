@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiSend, FiDownload, FiUser, FiMail, FiPhone } from 'react-icons/fi';
-import { 
-  CockpitButton, 
-  CockpitInput, 
-  CockpitToggle, 
-  CockpitGauge, 
-  CockpitPanel 
+import {
+  CockpitButton,
+  CockpitInput,
+  CockpitToggle,
+  CockpitGauge,
+  CockpitPanel
 } from './CockpitUI';
 
 const CockpitUIDemo = () => {
@@ -15,32 +15,32 @@ const CockpitUIDemo = () => {
     email: '',
     phone: ''
   });
-  
+
   const [toggles, setToggles] = useState({
     notifications: true,
     newsletter: false,
     darkMode: false
   });
-  
+
   const [gaugeValues, setGaugeValues] = useState({
     fuel: 75,
     speed: 60,
     altitude: 30
   });
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleToggle = (name) => {
     setToggles(prev => ({ ...prev, [name]: !prev[name] }));
   };
-  
+
   return (
-    <section id="cockpit-ui" className="section-padding bg-gray-50">
+    <section id="cockpit-ui" className="section-padding bg-gray-50 navbar-spacing">
       <div className="container mx-auto container-padding">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ const CockpitUIDemo = () => {
                   </CockpitButton>
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="text-sm font-medium text-gray-500 mb-3">Secondary Actions</h4>
                 <div className="flex flex-wrap gap-4">
@@ -89,7 +89,7 @@ const CockpitUIDemo = () => {
               </div>
             </div>
           </CockpitPanel>
-          
+
           {/* Form Panel */}
           <CockpitPanel title="Flight Information System" variant="primary" className="h-full">
             <div className="space-y-4">
@@ -102,7 +102,7 @@ const CockpitUIDemo = () => {
                 required
                 icon={<FiUser />}
               />
-              
+
               <CockpitInput
                 label="Email Address"
                 name="email"
@@ -113,7 +113,7 @@ const CockpitUIDemo = () => {
                 required
                 icon={<FiMail />}
               />
-              
+
               <CockpitInput
                 label="Phone Number"
                 name="phone"
@@ -122,7 +122,7 @@ const CockpitUIDemo = () => {
                 onChange={handleInputChange}
                 icon={<FiPhone />}
               />
-              
+
               <div className="mt-6">
                 <CockpitButton primary className="w-full">
                   Submit Information
@@ -130,7 +130,7 @@ const CockpitUIDemo = () => {
               </div>
             </div>
           </CockpitPanel>
-          
+
           {/* Toggles Panel */}
           <CockpitPanel title="System Preferences" variant="accent">
             <div className="space-y-4">
@@ -139,13 +139,13 @@ const CockpitUIDemo = () => {
                 isOn={toggles.notifications}
                 onToggle={() => handleToggle('notifications')}
               />
-              
+
               <CockpitToggle
                 label="Subscribe to Newsletter"
                 isOn={toggles.newsletter}
                 onToggle={() => handleToggle('newsletter')}
               />
-              
+
               <CockpitToggle
                 label="Dark Mode"
                 isOn={toggles.darkMode}
@@ -153,7 +153,7 @@ const CockpitUIDemo = () => {
               />
             </div>
           </CockpitPanel>
-          
+
           {/* Gauges Panel */}
           <CockpitPanel title="Flight Instruments">
             <div className="flex flex-wrap justify-center gap-8 py-4">
@@ -162,20 +162,20 @@ const CockpitUIDemo = () => {
                 label="Fuel Level"
                 color="blue"
               />
-              
+
               <CockpitGauge
                 value={gaugeValues.speed}
                 label="Speed"
                 color="orange"
               />
-              
+
               <CockpitGauge
                 value={gaugeValues.altitude}
                 label="Altitude"
                 color="green"
               />
             </div>
-            
+
             <div className="mt-6 grid grid-cols-3 gap-4">
               {Object.keys(gaugeValues).map((key) => (
                 <div key={key} className="space-y-2">

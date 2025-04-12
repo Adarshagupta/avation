@@ -14,6 +14,9 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      zIndex: {
+        '60': '60',
+      },
     },
   },
   plugins: [],
@@ -21,6 +24,7 @@ export default {
     'bg-white',
     'text-gray-800',
     'font-sans',
+    'z-60',
     // Add other utility classes that might be used via @apply but not detected by the content scanner
   ]
 }

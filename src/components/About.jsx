@@ -20,7 +20,7 @@ const About = () => {
   // Simplified animations for better performance
   const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [0.7, 1]);
-  
+
   const features = [
     {
       icon: <FaChalkboardTeacher />,
@@ -60,7 +60,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white"
+      className="py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white navbar-spacing"
     >
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -85,7 +85,7 @@ const About = () => {
             transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
           />
         </svg>
-        
+
         {/* Subtle plane silhouettes */}
         <div className="absolute top-1/3 -right-20 text-gray-100 rotate-12">
           <FaPlaneDeparture className="w-64 h-64" />
@@ -110,7 +110,7 @@ const About = () => {
           >
             ABOUT US
           </motion.div>
-          
+
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6 leading-tight bg-clip-text text-aviation-blue"
             initial={{ opacity: 0 }}
@@ -120,7 +120,7 @@ const About = () => {
           >
             Shaping the Future of Aviation Since 2005
           </motion.h2>
-          
+
           <motion.div
             className="w-20 h-1 bg-aviation-accent mx-auto mb-6 rounded-full"
             initial={{ width: 0 }}
@@ -128,7 +128,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           />
-          
+
           <motion.p
             className="text-lg text-gray-600 leading-relaxed"
             initial={{ opacity: 0 }}
@@ -156,26 +156,26 @@ const About = () => {
               >
                 {/* Top accent line */}
                 <div className={`h-1 w-full ${feature.color === 'blue' ? 'bg-aviation-blue' : 'bg-aviation-accent'}`}></div>
-                
+
                 {/* Icon and content */}
                 <div className="p-6 flex-grow flex flex-col">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl mb-4 ${
-                    feature.color === 'blue' 
-                      ? 'text-aviation-blue bg-aviation-blue/10' 
+                    feature.color === 'blue'
+                      ? 'text-aviation-blue bg-aviation-blue/10'
                       : 'text-aviation-accent bg-aviation-accent/10'
                   }`}>
                     {feature.icon}
                   </div>
-                  
+
                   <h3 className="text-xl font-bold mb-3 text-gray-800">
                     {feature.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 mb-6 flex-grow">
                     {feature.description}
                   </p>
-                  
-                  <button 
+
+                  <button
                     className={`flex items-center text-sm font-medium mt-auto ${
                       feature.color === 'blue' ? 'text-aviation-blue' : 'text-aviation-accent'
                     }`}
@@ -219,7 +219,7 @@ const About = () => {
           {/* Content */}
           <div className="relative">
             <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">Our Impact in Numbers</h3>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
               {stats.map((stat, index) => (
                 <motion.div
@@ -335,7 +335,7 @@ const About = () => {
                           { value: "Innovation", desc: "Embracing new technologies and teaching methods" },
                           { value: "Integrity", desc: "Maintaining the highest ethical standards" }
                         ].map((item, idx) => (
-                          <li 
+                          <li
                             key={idx}
                             className="flex items-start"
                           >
