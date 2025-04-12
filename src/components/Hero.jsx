@@ -223,25 +223,30 @@ const Hero = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="mb-8"
             >
+              {/* Redesigned modern badge */}
               <motion.div
-                className="inline-block mb-4 px-4 py-1 bg-aviation-blue/10 rounded-full text-aviation-blue font-medium"
+                className="inline-block mb-6 py-1.5 px-4 bg-aviation-blue/5 rounded-full text-aviation-blue font-medium border border-aviation-blue/10 backdrop-blur-sm"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isContentInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Premier Aviation Academy
+                <span className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-aviation-accent animate-pulse"></span>
+                  Premier Aviation Academy
+                </span>
               </motion.div>
 
+              {/* Modern cleaner heading */}
               <motion.h1
                 ref={titleRef}
-                className="text-5xl md:text-7xl font-bold text-aviation-blue mb-6"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold text-aviation-blue mb-8 tracking-tight"
                 style={{
                   y: titleY,
                   opacity: titleOpacity
                 }}
               >
                 <motion.span
-                  className="block"
+                  className="block mb-2"
                   key={`title-part1-${forceRestart.current}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -249,81 +254,77 @@ const Hero = () => {
                 >
                   Your Journey to
                 </motion.span>
-                <motion.span
-                  className="block relative"
+                <motion.div
+                  className="relative inline-block"
                   key={`title-part2-${forceRestart.current}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2 }}
                 >
-                  the Skies
-                  <motion.svg
-                    viewBox="0 0 300 20"
-                    className="absolute -bottom-2 left-0 w-full h-5 text-aviation-accent"
-                    initial={{ pathLength: 0 }}
-                    key={`title-underline-${forceRestart.current}`}
-                    animate={{ pathLength: 1 }}
+                  <span className="relative z-10">the Skies</span>
+                  <motion.div 
+                    className="absolute -bottom-3 left-0 h-3 bg-aviation-accent/30 w-full rounded-sm"
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
                     transition={{ duration: 1, delay: 0.4 }}
-                  >
-                    <motion.path
-                      d="M8,12 C60,5 150,5 292,12"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                    />
-                  </motion.svg>
-                </motion.span>
+                  />
+                </motion.div>
                 <motion.span
-                  className="block"
-                  key={`title-part2-${forceRestart.current}`}
+                  className="block mt-2"
+                  key={`title-part3-${forceRestart.current}`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
                 >
                   Begins Here
                 </motion.span>
               </motion.h1>
 
+              {/* Clean, modern description */}
               <motion.p
-                className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl"
+                className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg font-light leading-relaxed"
                 key={`description-${forceRestart.current}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Experience excellence in flight education with our comprehensive training programs designed for aspiring pilots and aviation professionals.
+                Experience excellence in flight education with comprehensive training programs designed for aspiring aviation professionals.
               </motion.p>
 
+              {/* Modern button layout */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-4"
+                className="flex flex-col sm:flex-row gap-4 mb-16"
                 key={`buttons-${forceRestart.current}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
               >
                 <CockpitButton primary>
                   Explore Courses
                 </CockpitButton>
                 <CockpitButton primary={false}>
-                  Book a Tour
+                  <span className="flex items-center gap-2">
+                    <span>Book a Tour</span>
+                    <motion.span 
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >→</motion.span>
+                  </span>
                 </CockpitButton>
               </motion.div>
-            </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12"
-              key={`stats-${forceRestart.current}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <StatCard number="20+" label="Years Experience" delay={0} />
-              <StatCard number="1000+" label="Graduates" delay={0.2} />
-              <StatCard number="98%" label="Success Rate" delay={0.4} />
+              {/* Stats with clean modern design */}
+              <motion.div
+                className="grid grid-cols-3 gap-4 mt-6 max-w-lg"
+                key={`stats-${forceRestart.current}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <StatCard number="20+" label="Years Experience" delay={0} />
+                <StatCard number="1000+" label="Graduates" delay={0.2} />
+                <StatCard number="98%" label="Success Rate" delay={0.4} />
+              </motion.div>
             </motion.div>
           </div>
 
@@ -521,20 +522,22 @@ const StatCard = ({ number, label, delay = 0 }) => {
   return (
     <motion.div
       ref={ref}
-      className="p-4 rounded-xl border border-gray-100 shadow-sm bg-white/30 backdrop-blur-sm"
+      className="p-3 rounded-lg border-b-2 border-aviation-accent/20 bg-white/10 hover:bg-white/30 transition-all duration-300"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay }}
+      whileHover={{ y: -5 }}
     >
       <motion.div
-        className="text-3xl font-bold text-aviation-blue mb-1"
+        className="text-2xl font-bold text-aviation-blue mb-1 flex items-baseline"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, delay: delay + 0.2 }}
       >
-        {count}{suffix}
+        <span>{count}</span>
+        <span className="text-aviation-accent font-semibold">{suffix}</span>
       </motion.div>
-      <div className="text-sm text-gray-600">{label}</div>
+      <div className="text-xs uppercase tracking-wide text-gray-500 font-medium">{label}</div>
     </motion.div>
   );
 };
