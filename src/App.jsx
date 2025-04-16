@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
+import ModernAbout from './components/ModernAbout';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -79,7 +79,7 @@ function App() {
 
         {/* Main content */}
         <Hero key={loading ? 'loading' : 'loaded'} />
-        <About />
+        <ModernAbout />
         <ModernCourses />
         <ProjectShowcase />
         <CockpitUIDemo />
