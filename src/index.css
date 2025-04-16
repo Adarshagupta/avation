@@ -220,24 +220,26 @@ body {
 
 /* Grid layout for courses section */
 /* Mobile layout first */
-.courses-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-}
-
-.category-card {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.category-card-mobile {
   position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .featured-content {
-  grid-column: 1 / -1;
-  height: 350px;
+  height: 400px;
   margin-top: 1rem;
+  position: relative;
+}
+
+/* Hide scrollbar but allow scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Expanding cards container */
@@ -245,23 +247,33 @@ body {
   display: flex;
   width: 100%;
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  gap: 4px;
+  background-color: #f0f4f8;
+  padding: 4px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 20px 60px -10px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 /* Expandable category cards */
 .category-card-expandable {
   position: relative;
   min-width: 60px;
-  transition: flex-grow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              flex-basis 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+  transition: flex-grow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              flex-basis 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.3s ease,
-              opacity 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  background-color: #f9fafb;
+              opacity 0.3s ease,
+              transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .category-card-expandable:hover {
-  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  box-shadow: 0 15px 30px -5px rgba(0,0,0,0.08), 0 10px 15px -5px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
 }
 
 /* Add subtle grid pattern to cards */
@@ -276,9 +288,26 @@ body {
     linear-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
   background-size: 20px 20px;
-  opacity: 0.3;
+  opacity: 0.2;
   z-index: 0;
   pointer-events: none;
+}
+
+/* Gradient overlay for expanded cards */
+.category-card-expandable .overlay-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 5;
+}
+
+.category-card-expandable:hover .overlay-gradient {
+  opacity: 1;
 }
 
 /* Line clamp for descriptions */
@@ -293,19 +322,34 @@ body {
 
 /* Tablet and desktop layout */
 @media (min-width: 768px) {
-  .courses-grid {
-    grid-template-columns: repeat(7, 1fr) 5fr;
-    gap: 1rem;
-  }
-
-  .category-card {
-    height: 100%;
-    min-height: 300px;
-  }
-
   .featured-content {
-    grid-column: span 5;
-    height: 100%;
     margin-top: 0;
   }
+}
+
+/* Decorative elements */
+.courses-container::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+  top: -100px;
+  right: -100px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.courses-container::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0) 70%);
+  bottom: -50px;
+  left: -50px;
+  z-index: -1;
+  pointer-events: none;
 }

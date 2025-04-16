@@ -103,15 +103,16 @@ const ModernCourses = () => {
   const content = featuredContent[activeCategory];
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden" id="courses">
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden" id="courses">
       <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold mb-4">Our Courses</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Explore our specialized courses designed to help you master the craft of UI development.</p>
+        <div className="mb-16 text-center">
+          <div className="inline-block mb-3 px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium tracking-wide">INTERACTIVE LEARNING</div>
+          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Our Courses</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">Explore our specialized courses designed to help you master the craft of UI development.</p>
         </div>
 
         {/* Desktop view with expanding cards */}
-        <div className="hidden md:flex h-[400px] gap-2 mb-8 courses-container">
+        <div className="hidden md:flex h-[450px] mb-16 courses-container relative">
           {categories.map((category) => {
             const isHovered = hoveredCategory === category.id;
             const content = featuredContent[category.id];
@@ -119,8 +120,8 @@ const ModernCourses = () => {
             return (
               <motion.div
                 key={category.id}
-                className={`category-card-expandable relative rounded-lg overflow-hidden cursor-pointer transition-all duration-500 ease-in-out ${
-                  activeCategory === category.id ? 'border-2 border-blue-500' : 'border border-gray-200'
+                className={`category-card-expandable relative overflow-hidden cursor-pointer ${
+                  activeCategory === category.id ? 'ring-2 ring-blue-500 ring-offset-2' : ''
                 }`}
                 onClick={() => setActiveCategory(category.id)}
                 onMouseEnter={() => setHoveredCategory(category.id)}
@@ -138,12 +139,12 @@ const ModernCourses = () => {
                   {isHovered && (
                     <motion.div
                       className="absolute inset-0 z-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 1.05 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <div className="absolute inset-0 bg-black/40 z-10"></div>
+                      <div className="overlay-gradient"></div>
                       <img
                         src={content.image}
                         alt={content.title}
@@ -154,27 +155,27 @@ const ModernCourses = () => {
                 </AnimatePresence>
 
                 {/* Vertical text label - always visible */}
-                <div className={`vertical-text font-medium text-sm tracking-wider ${isHovered ? 'text-white z-20 relative' : 'text-gray-700'} absolute inset-0 flex items-center justify-center`}>
-                  {category.label}
+                <div className={`vertical-text font-medium text-sm tracking-widest ${isHovered ? 'text-white z-20 relative' : 'text-gray-700'} absolute inset-0 flex items-center justify-center`}>
+                  <span className="font-mono">{category.label}</span>
                 </div>
 
                 {/* Expanded content - only visible when hovered */}
                 <AnimatePresence>
                   {isHovered && (
                     <motion.div
-                      className="absolute inset-0 z-20 p-6 flex flex-col justify-end text-white"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="absolute inset-0 z-20 p-8 flex flex-col justify-end text-white"
+                      initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
+                      transition={{ duration: 0.4, delay: 0.1 }}
                     >
-                      <h3 className="text-xl font-bold mb-2">{content.title}</h3>
-                      <p className="text-white/80 text-sm mb-4 line-clamp-3">
+                      <h3 className="text-2xl font-bold mb-3 drop-shadow-sm">{content.title}</h3>
+                      <p className="text-white/90 text-sm mb-5 line-clamp-3 max-w-md">
                         {content.description}
                       </p>
                       <motion.button
-                        className="inline-flex items-center space-x-2 bg-white/90 text-gray-900 rounded-full px-4 py-1.5 text-xs font-medium w-fit"
-                        whileHover={{ scale: 1.05 }}
+                        className="inline-flex items-center space-x-2 bg-white/95 text-gray-900 rounded-full px-5 py-2 text-sm font-medium w-fit shadow-lg backdrop-blur-sm"
+                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 1)' }}
                         whileTap={{ scale: 0.95 }}
                       >
                         {content.hasVideo ? (
@@ -194,8 +195,8 @@ const ModernCourses = () => {
                 </AnimatePresence>
 
                 {/* Category icon */}
-                <div className={`absolute bottom-3 left-0 right-0 flex justify-center ${isHovered ? 'z-20' : ''}`}>
-                  <div className="w-6 h-6 flex items-center justify-center">
+                <div className={`absolute ${isHovered ? 'top-4 right-4 z-30' : 'bottom-3 left-0 right-0 flex justify-center'}`}>
+                  <div className={`${isHovered ? 'bg-white/20 backdrop-blur-md w-8 h-8 rounded-full flex items-center justify-center shadow-lg' : 'w-6 h-6 flex items-center justify-center'}`}>
                     {category.id === 'the-craft' && <span className="text-xs">💎</span>}
                     {category.id === 'css-animation' && <span className="text-xs">⚡</span>}
                     {category.id === 'svg-filters' && <span className="text-xs">🔍</span>}
@@ -211,66 +212,69 @@ const ModernCourses = () => {
         </div>
 
         {/* Mobile view with grid layout */}
-        <div className="courses-grid grid grid-cols-1 md:hidden gap-6 items-stretch">
-          {/* Category navigation for mobile */}
-          {categories.map((category) => (
-            <motion.div
-              key={category.id}
-              className={`category-card border border-gray-200 rounded-lg cursor-pointer transition-all duration-300 flex items-center justify-center ${
-                activeCategory === category.id
-                  ? 'bg-white shadow-md'
-                  : 'bg-gray-50 hover:bg-white hover:shadow-sm'
-              }`}
-              onClick={() => setActiveCategory(category.id)}
-              whileHover={{ y: -5 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="font-medium text-xs tracking-wider text-gray-700">
-                {category.label}
-              </div>
-
-              {/* Category icon */}
-              <div className="absolute bottom-3 left-0 right-0 flex justify-center">
-                <div className="w-6 h-6 flex items-center justify-center">
-                  {category.id === 'the-craft' && <span className="text-xs">💎</span>}
-                  {category.id === 'css-animation' && <span className="text-xs">⚡</span>}
-                  {category.id === 'svg-filters' && <span className="text-xs">🔍</span>}
-                  {category.id === 'scroll-animation' && <span className="text-xs">📜</span>}
-                  {category.id === 'timing-canvas' && <span className="text-xs">🎬</span>}
-                  {category.id === 'layout-tricks' && <span className="text-xs">📐</span>}
-                  {category.id === 'mastering-time' && <span className="text-xs">⏱️</span>}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="md:hidden">
+          {/* Category navigation for mobile - horizontal scrolling */}
+          <div className="overflow-x-auto pb-4 hide-scrollbar">
+            <div className="flex space-x-3 px-1 py-2 min-w-max">
+              {categories.map((category) => (
+                <motion.div
+                  key={category.id}
+                  className={`category-card-mobile flex-shrink-0 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 flex items-center space-x-2 ${
+                    activeCategory === category.id
+                      ? 'bg-blue-50 border-blue-200 text-blue-700 shadow-sm'
+                      : 'bg-white border-gray-100 text-gray-700 hover:bg-gray-50'
+                  } border`}
+                  onClick={() => setActiveCategory(category.id)}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="w-6 h-6 flex items-center justify-center bg-white rounded-full shadow-sm">
+                    {category.id === 'the-craft' && <span className="text-xs">💎</span>}
+                    {category.id === 'css-animation' && <span className="text-xs">⚡</span>}
+                    {category.id === 'svg-filters' && <span className="text-xs">🔍</span>}
+                    {category.id === 'scroll-animation' && <span className="text-xs">📜</span>}
+                    {category.id === 'timing-canvas' && <span className="text-xs">🎬</span>}
+                    {category.id === 'layout-tricks' && <span className="text-xs">📐</span>}
+                    {category.id === 'mastering-time' && <span className="text-xs">⏱️</span>}
+                  </div>
+                  <div className="font-medium text-xs tracking-wide">
+                    {category.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
           {/* Featured content area for mobile - only shows the active category */}
           <motion.div
-            className="featured-content rounded-lg overflow-hidden relative"
+            className="featured-content rounded-2xl overflow-hidden relative mt-4 shadow-lg"
             key={activeCategory}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="absolute inset-0 bg-black/50 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
             <img
               src={content.image}
               alt={content.title}
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 z-20 p-8 flex flex-col justify-center text-white">
-              <h3 className="text-3xl font-bold mb-4">{content.title}</h3>
-              <p className="text-white/90 mb-6 max-w-lg">
+            <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end text-white">
+              <div className="bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium w-fit mb-3 text-white/90">
+                {categories.find(c => c.id === activeCategory)?.label}
+              </div>
+              <h3 className="text-2xl font-bold mb-3 drop-shadow-md">{content.title}</h3>
+              <p className="text-white/90 mb-6 max-w-lg text-sm line-clamp-3">
                 {content.description}
               </p>
 
               <motion.button
                 className={`inline-flex items-center space-x-2 ${
                   content.hasVideo
-                    ? 'bg-white text-gray-900'
-                    : 'bg-transparent border border-white'
-                } rounded-full px-6 py-2 text-sm font-medium w-fit`}
+                    ? 'bg-white/95 text-gray-900 shadow-lg'
+                    : 'bg-blue-600 text-white'
+                } rounded-full px-6 py-2.5 text-sm font-medium w-fit backdrop-blur-sm`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
