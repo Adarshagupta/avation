@@ -108,7 +108,7 @@ body {
     scroll-snap-type: x mandatory;
     padding-bottom: 1rem;
   }
-  
+
   .course-card {
     scroll-snap-align: start;
   }
@@ -208,4 +208,104 @@ body {
   height: 2px;
   background-color: #000;
   transition: width 0.3s ease;
+}
+
+/* Modern Courses Grid Layout */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  letter-spacing: 0.1em;
+}
+
+/* Grid layout for courses section */
+/* Mobile layout first */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.category-card {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.featured-content {
+  grid-column: 1 / -1;
+  height: 350px;
+  margin-top: 1rem;
+}
+
+/* Expanding cards container */
+.courses-container {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+/* Expandable category cards */
+.category-card-expandable {
+  position: relative;
+  min-width: 60px;
+  transition: flex-grow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              flex-basis 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s ease,
+              opacity 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background-color: #f9fafb;
+}
+
+.category-card-expandable:hover {
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+}
+
+/* Add subtle grid pattern to cards */
+.category-card-expandable::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Line clamp for descriptions */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 4.5em; /* Fallback for non-WebKit browsers */
+}
+
+/* Tablet and desktop layout */
+@media (min-width: 768px) {
+  .courses-grid {
+    grid-template-columns: repeat(7, 1fr) 5fr;
+    gap: 1rem;
+  }
+
+  .category-card {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .featured-content {
+    grid-column: span 5;
+    height: 100%;
+    margin-top: 0;
+  }
 }
