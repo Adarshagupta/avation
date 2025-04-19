@@ -84,7 +84,6 @@ function App() {
         <ProjectShowcase />
         <CockpitUIDemo />
         <Testimonials />
-        <Contact />
         <Footer />
 
         {/* Cache Monitor (only visible in admin mode) */}

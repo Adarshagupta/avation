@@ -4,7 +4,6 @@ import { FiArrowRight, FiPlay } from 'react-icons/fi';
 
 const ModernCourses = () => {
   const [activeCategory, setActiveCategory] = useState('timing-canvas');
-  const [hoveredCategory, setHoveredCategory] = useState(null);
   const [expandedWidth, setExpandedWidth] = useState({});
 
   // Course categories with vertical labels
@@ -51,7 +50,9 @@ const ModernCourses = () => {
     };
   }, [categories.length]);
 
-
+  // Set the default hovered category to the middle card (scroll-animation)
+  const middleCategoryId = categories[Math.floor(categories.length / 2)].id;
+  const [hoveredCategory, setHoveredCategory] = useState(middleCategoryId);
 
   // Featured content for the active category
   const featuredContent = {
@@ -114,9 +115,8 @@ const ModernCourses = () => {
         {/* Desktop view with expanding cards */}
         <div className="hidden md:flex h-[450px] mb-16 courses-container relative">
           {categories.map((category) => {
-            const isHovered = hoveredCategory === category.id;
-            const content = featuredContent[category.id];
-
+            // Determine if this card should be expanded
+            const isExpanded = (hoveredCategory ?? middleCategoryId) === category.id;
             return (
               <motion.div
                 key={category.id}
@@ -128,15 +128,15 @@ const ModernCourses = () => {
                 onMouseLeave={() => setHoveredCategory(null)}
                 layout
                 style={{
-                  flexGrow: isHovered ? 3 : 1,
-                  flexBasis: isHovered ? expandedWidth.expanded : (hoveredCategory ? expandedWidth.collapsed : expandedWidth.normal),
-                  opacity: hoveredCategory && !isHovered ? 0.7 : 1
+                  flexGrow: isExpanded ? 3 : 1,
+                  flexBasis: isExpanded ? expandedWidth.expanded : (hoveredCategory ? expandedWidth.collapsed : expandedWidth.normal),
+                  opacity: hoveredCategory && !isExpanded ? 0.7 : 1
                 }}
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {/* Background image with overlay - only visible when hovered */}
                 <AnimatePresence>
-                  {isHovered && (
+                  {isExpanded && (
                     <motion.div
                       className="absolute inset-0 z-0"
                       initial={{ opacity: 0, scale: 1.1 }}
@@ -146,8 +146,8 @@ const ModernCourses = () => {
                     >
                       <div className="overlay-gradient"></div>
                       <img
-                        src={content.image}
-                        alt={content.title}
+                        src={featuredContent[category.id].image}
+                        alt={featuredContent[category.id].title}
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
@@ -155,13 +155,13 @@ const ModernCourses = () => {
                 </AnimatePresence>
 
                 {/* Vertical text label - always visible */}
-                <div className={`vertical-text font-medium text-sm tracking-widest ${isHovered ? 'text-white z-20 relative' : 'text-gray-700'} absolute inset-0 flex items-center justify-center`}>
+                <div className={`vertical-text font-medium text-sm tracking-widest ${isExpanded ? 'text-white z-20 relative' : 'text-gray-700'} absolute inset-0 flex items-center justify-center`}>
                   <span className="font-mono">{category.label}</span>
                 </div>
 
                 {/* Expanded content - only visible when hovered */}
                 <AnimatePresence>
-                  {isHovered && (
+                  {isExpanded && (
                     <motion.div
                       className="absolute inset-0 z-20 p-8 flex flex-col justify-end text-white"
                       initial={{ opacity: 0, y: 30 }}
@@ -169,23 +169,23 @@ const ModernCourses = () => {
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ duration: 0.4, delay: 0.1 }}
                     >
-                      <h3 className="text-2xl font-bold mb-3 drop-shadow-sm">{content.title}</h3>
+                      <h3 className="text-2xl font-bold mb-3 drop-shadow-sm">{featuredContent[category.id].title}</h3>
                       <p className="text-white/90 text-sm mb-5 line-clamp-3 max-w-md">
-                        {content.description}
+                        {featuredContent[category.id].description}
                       </p>
                       <motion.button
                         className="inline-flex items-center space-x-2 bg-white/95 text-gray-900 rounded-full px-5 py-2 text-sm font-medium w-fit shadow-lg backdrop-blur-sm"
                         whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 1)' }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        {content.hasVideo ? (
+                        {featuredContent[category.id].hasVideo ? (
                           <>
                             <FiPlay className="mr-1" />
-                            {content.cta}
+                            {featuredContent[category.id].cta}
                           </>
                         ) : (
                           <>
-                            {content.cta}
+                            {featuredContent[category.id].cta}
                             <FiArrowRight className="ml-1" />
                           </>
                         )}
@@ -195,8 +195,8 @@ const ModernCourses = () => {
                 </AnimatePresence>
 
                 {/* Category icon */}
-                <div className={`absolute ${isHovered ? 'top-4 right-4 z-30' : 'bottom-3 left-0 right-0 flex justify-center'}`}>
-                  <div className={`${isHovered ? 'bg-white/20 backdrop-blur-md w-8 h-8 rounded-full flex items-center justify-center shadow-lg' : 'w-6 h-6 flex items-center justify-center'}`}>
+                <div className={`absolute ${isExpanded ? 'top-4 right-4 z-30' : 'bottom-3 left-0 right-0 flex justify-center'}`}>
+                  <div className={`${isExpanded ? 'bg-white/20 backdrop-blur-md w-8 h-8 rounded-full flex items-center justify-center shadow-lg' : 'w-6 h-6 flex items-center justify-center'}`}>
                     {category.id === 'the-craft' && <span className="text-xs">💎</span>}
                     {category.id === 'css-animation' && <span className="text-xs">⚡</span>}
                     {category.id === 'svg-filters' && <span className="text-xs">🔍</span>}
