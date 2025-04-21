@@ -10,36 +10,45 @@ import NetworkPage from './pages/Network.jsx'
 import ContactPage from './pages/Contact.jsx'
 import BookingPage from './pages/Booking.jsx'
 
-const router = createBrowserRouter([
+// Use basename to ensure routing works correctly in all environments
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+    },
+    {
+      path: "/blog",
+      element: <BlogPage />,
+    },
+    {
+      path: "/classes",
+      element: <ClassesPage />,
+    },
+    {
+      path: "/about",
+      element: <AboutPage />,
+    },
+    {
+      path: "/network",
+      element: <NetworkPage />,
+    },
+    {
+      path: "/contact",
+      element: <ContactPage />,
+    },
+    {
+      path: "/booking",
+      element: <BookingPage />,
+    }
+  ],
   {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/blog",
-    element: <BlogPage />,
-  },
-  {
-    path: "/classes",
-    element: <ClassesPage />,
-  },
-  {
-    path: "/about",
-    element: <AboutPage />,
-  },
-  {
-    path: "/network",
-    element: <NetworkPage />,
-  },
-  {
-    path: "/contact",
-    element: <ContactPage />,
-  },
-  {
-    path: "/booking",
-    element: <BookingPage />,
+    basename: '/',
   }
-]);
+);
+
+// Log routing for debugging
+console.log('Router initialized with routes:', router.routes.map(r => r.path));
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

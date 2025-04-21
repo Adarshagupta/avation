@@ -185,6 +185,8 @@ app.get('/api/cache/stats', async (req, res) => {
 
 // Fallback route for SPA
 app.get('*', (req, res) => {
+  // Explicitly log routes that are being handled by the fallback
+  console.log(`Fallback route handling: ${req.originalUrl}`);
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
