@@ -6,8 +6,9 @@ import App from './App.jsx'
 import BlogPage from './pages/Blog.jsx'
 import ClassesPage from './pages/Classes.jsx'
 import AboutPage from './pages/About.jsx'
-import TestimonialsPage from './pages/Testimonials.jsx'
+import NetworkPage from './pages/Network.jsx'
 import ContactPage from './pages/Contact.jsx'
+import BookingPage from './pages/Booking.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,12 +28,16 @@ const router = createBrowserRouter([
     element: <AboutPage />,
   },
   {
-    path: "/testimonials",
-    element: <TestimonialsPage />,
+    path: "/network",
+    element: <NetworkPage />,
   },
   {
     path: "/contact",
     element: <ContactPage />,
+  },
+  {
+    path: "/booking",
+    element: <BookingPage />,
   }
 ]);
 

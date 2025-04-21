@@ -232,7 +232,7 @@ const Hero = () => {
               >
                 <span className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-aviation-accent animate-pulse"></span>
-                  Premier Aviation Academy
+                Premier Aviation Academy
                 </span>
               </motion.div>
 
@@ -267,7 +267,7 @@ const Hero = () => {
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 1, delay: 0.4 }}
-                  />
+                    />
                 </motion.div>
                 <motion.span
                   className="block mt-2"
@@ -311,19 +311,19 @@ const Hero = () => {
                     >→</motion.span>
                   </span>
                 </CockpitButton>
-              </motion.div>
+            </motion.div>
 
               {/* Stats with clean modern design */}
-              <motion.div
+            <motion.div
                 className="grid grid-cols-3 gap-4 mt-6 max-w-lg"
-                key={`stats-${forceRestart.current}`}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                <StatCard number="20+" label="Years Experience" delay={0} />
-                <StatCard number="1000+" label="Graduates" delay={0.2} />
-                <StatCard number="98%" label="Success Rate" delay={0.4} />
+              key={`stats-${forceRestart.current}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <StatCard number="20+" label="Years Experience" delay={0} />
+              <StatCard number="1000+" label="Graduates" delay={0.2} />
+              <StatCard number="98%" label="Success Rate" delay={0.4} />
               </motion.div>
             </motion.div>
           </div>

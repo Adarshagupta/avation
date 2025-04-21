@@ -1,0 +1,7 @@
+<svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="40" rx="4" fill="white"/>
+  <path d="M20 15H35V25H20V15Z" fill="#125EA0"/>
+  <path d="M35 15H50V25H35V15Z" fill="#CA0138"/>
+  <text x="55" y="21" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#125EA0">BRITISH</text>
+  <text x="55" y="28" font-family="Arial, sans-serif" font-size="6" font-weight="bold" fill="#CA0138">AIRWAYS</text>
+</svg> 

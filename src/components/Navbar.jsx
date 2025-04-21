@@ -55,10 +55,12 @@ const Navbar = () => {
       setActiveSection('classes');
     } else if (location.pathname === '/about') {
       setActiveSection('about');
-    } else if (location.pathname === '/testimonials') {
-      setActiveSection('testimonials');
+    } else if (location.pathname === '/network') {
+      setActiveSection('network');
     } else if (location.pathname === '/contact') {
       setActiveSection('contact');
+    } else if (location.pathname === '/booking') {
+      setActiveSection('booking');
     } else if (location.pathname === '/') {
       setActiveSection('home');
     }
@@ -69,7 +71,7 @@ const Navbar = () => {
     { to: '/', label: 'Home', id: 'home' },
     { to: '/about', label: 'About', id: 'about' },
     { to: '/classes', label: 'Classes', id: 'classes' },
-    { to: '/testimonials', label: 'Testimonials', id: 'testimonials' },
+    { to: '/network', label: 'Global Network', id: 'network' },
     { to: '/blog', label: 'Blog', id: 'blog' },
     { to: '/contact', label: 'Contact', id: 'contact' }
   ];
@@ -146,6 +148,7 @@ const Navbar = () => {
             ))}
 
             <motion.button
+              onClick={() => window.location.href = '/booking'}
               className={`btn py-2 px-5 text-sm ${scrolled ? 'btn-primary' : 'btn-primary'}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -156,7 +159,7 @@ const Navbar = () => {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              Enroll Now
+              Book a Consultation
             </motion.button>
           </div>
 
